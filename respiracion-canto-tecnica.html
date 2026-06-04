@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Respiración para Cantar · Magali Muro</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root {
+  --ink:       #1A1410;
+  --ink-mid:   #3D3530;
+  --ink-soft:  #7A6E66;
+  --paper:     #F5F0E8;
+  --paper-alt: #EDE7DA;
+  --paper-dark:#D9D1C2;
+  --rust:      #8B3A1C;
+  --rust-light:#C4612E;
+  --gold:      #B8861A;
+  --gold-light:#D4A832;
+  --sage:      #4A6741;
+  --line:      rgba(26,20,16,0.12);
+  --line-heavy:rgba(26,20,16,0.25);
+}
+
+/* ═══════════════════════════════════════
+   BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════ */
+.display {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.0;
+}
+.serif { font-family: 'Libre Baskerville', serif; }
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+}
+h2 em { font-style: italic; color: var(--rust); }
+
+h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink-mid);
+  margin-bottom: 0.6rem;
+}
+
+p {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin-bottom: 1.2rem;
+  line-height: 1.75;
+}
+
+.label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.label::before {
+  content:'';
+  display:inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--rust);
+}
+
+/* ═══════════════════════════════════════
+   LAYOUT HELPERS
+═══════════════════════════════════════ */
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+.rule { width:100%; height:1px; background:var(--line-heavy); margin: 0; }
+
+/* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+header {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--paper-alt);
+  border-bottom: 1px solid var(--line-heavy);
+}
+
+/* Ruled-paper lines */
+header::before {
+  content:'';
+  position:absolute; inset:0;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 39px,
+    rgba(26,20,16,0.06) 39px,
+    rgba(26,20,16,0.06) 40px
+  );
+  pointer-events:none;
+}
+
+.header-inner {
+  position: relative;
+  z-index:2;
+  text-align:center;
+  padding: 4rem 1rem;
+}
+
+.header-kicker {
+  font-family:'DM Sans',sans-serif;
+  font-size:0.65rem;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--rust);
+  margin-bottom:2rem;
+  opacity:0;
+  animation: riseIn 0.9s ease 0.1s forwards;
+}
+
+.header-title {
+  font-family:'Playfair Display',serif;
+  font-size: clamp(4rem,10vw,9rem);
+  font-weight:700;
+  line-height:0.9;
+  color: var(--ink);
+  margin-bottom: 2rem;
+  opacity:0;
+  animation: riseIn 1s ease 0.3s forwards;
+}
+.header-title em {
+  display:block;
+  font-style:italic;
+  color:var(--rust);
+}
+
+.header-subtitle {
+  font-family:'Libre Baskerville',serif;
+  font-size:1.05rem;
+  font-style:italic;
+  color:var(--ink-soft);
+  max-width:500px;
+  margin:0 auto 3rem;
+  opacity:0;
+  animation: riseIn 1s ease 0.5s forwards;
+}
+
+/* Animated breath circle in header */
+.breath-ring {
+  position:absolute;
+  border-radius:50%;
+  border:1px solid var(--rust-light);
+  opacity:0;
+  animation: ringPulse 4s ease-in-out infinite;
+}
+.ring1 { width:200px; height:200px; top:10%; left:5%; animation-delay:0s; }
+.ring2 { width:120px; height:120px; top:60%; right:8%; animation-delay:1.5s; }
+.ring3 { width:300px; height:300px; bottom:5%; left:50%; transform:translateX(-50%); animation-delay:0.8s; opacity:0; }
+
+@keyframes ringPulse {
+  0%   { transform:scale(0.8); opacity:0; }
+  40%  { opacity:0.3; }
+  100% { transform:scale(1.4); opacity:0; }
+}
+
+/* Scroll cue */
+.scroll-cue {
+  position:absolute;
+  bottom:2.5rem;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.4rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.6rem;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  opacity:0;
+  animation: riseIn 1s ease 1.2s forwards;
+}
+.scroll-cue::after {
+  content:'';
+  width:1px; height:36px;
+  background:linear-gradient(to bottom, var(--rust), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+/* ═══════════════════════════════════════
+   SECTION: INTRO DOBLE COLUMNA
+═══════════════════════════════════════ */
+.intro-section {
+  padding: 7rem 0;
+  border-bottom:1px solid var(--line);
+}
+.intro-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;
+  align-items:start;
+}
+@media(max-width:720px){ .intro-grid{grid-template-columns:1fr;gap:3rem;} }
+
+.intro-number {
+  font-family:'Playfair Display',serif;
+  font-size:12rem;
+  font-weight:700;
+  color:var(--paper-dark);
+  line-height:0.8;
+  user-select:none;
+  margin-bottom:-2rem;
+}
+
+/* ═══════════════════════════════════════
+   SECTION: ANATOMÍA INTERACTIVA
+═══════════════════════════════════════ */
+.anatomy-section {
+  background:var(--ink);
+  color:var(--paper);
+  padding:7rem 0;
+}
+.anatomy-section .label { color:var(--gold-light); }
+.anatomy-section .label::before { background:var(--gold-light); }
+.anatomy-section h2 { color:var(--paper); }
+.anatomy-section h2 em { color:var(--gold-light); }
+.anatomy-section p { color:rgba(245,240,232,0.65); }
+
+.anatomy-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+}
+@media(max-width:760px){ .anatomy-grid{grid-template-columns:1fr;} }
+
+/* ═══════════════════════════════════════
+   INTERACTIVE TORSO DIAGRAM
+═══════════════════════════════════════ */
+.diagram-wrap {
+  position:relative;
+  cursor:pointer;
+}
+.diagram-wrap svg { display:block; width:100%; max-width:460px; margin:0 auto; }
+
+.tooltip-box {
+  position:absolute;
+  background:var(--paper);
+  color:var(--ink);
+  border-left:3px solid var(--rust);
+  padding:0.9rem 1.1rem;
+  max-width:220px;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.82rem;
+  line-height:1.5;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
+  pointer-events:none;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity 0.25s ease, transform 0.25s ease;
+  z-index:10;
+}
+.tooltip-box.visible { opacity:1; transform:translateY(0); }
+.tooltip-title { font-weight:500; color:var(--rust); display:block; margin-bottom:0.2rem; font-size:0.78rem; letter-spacing:0.05em; }
+
+/* ═══════════════════════════════════════
+   SECTION: LAS 5 VARIABLES
+═══════════════════════════════════════ */
+.variables-section { padding:7rem 0; border-bottom:1px solid var(--line); }
+
+.vars-intro { margin-bottom:4rem; }
+
+.var-item {
+  display:grid;
+  grid-template-columns:80px 1fr 320px;
+  gap:2.5rem;
+  align-items:start;
+  padding:2.5rem 0;
+  border-top:1px solid var(--line);
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 0.6s ease, transform 0.6s ease;
+}
+.var-item.vis { opacity:1; transform:none; }
+
+@media(max-width:900px){
+  .var-item { grid-template-columns:60px 1fr; }
+  .var-item .var-chart { display:none; }
+}
+
+.var-num {
+  font-family:'Playfair Display',serif;
+  font-size:3.5rem;
+  font-weight:700;
+  color:var(--paper-dark);
+  line-height:1;
+}
+.var-body h3 { color:var(--ink); font-size:1.4rem; margin-bottom:0.5rem; }
+.var-body p { max-width:100%; margin:0; color:var(--ink-soft); }
+
+/* Mini bar charts for each variable */
+.var-chart { padding-top:0.4rem; }
+.mini-chart { display:flex; flex-direction:column; gap:0.5rem; }
+.bar-row { display:flex; align-items:center; gap:0.75rem; }
+.bar-label { font-size:0.68rem; font-family:'DM Sans',sans-serif; color:var(--ink-soft); width:80px; text-align:right; letter-spacing:0.04em; }
+.bar-track { flex:1; height:6px; background:var(--paper-dark); border-radius:3px; overflow:hidden; }
+.bar-fill { height:100%; border-radius:3px; background:var(--rust); transform:scaleX(0); transform-origin:left; transition:transform 1s ease; }
+.var-item.vis .bar-fill { transform:scaleX(1); }
+
+/* ═══════════════════════════════════════
+   SECTION: CICLO RESPIRATORIO ANIMADO
+═══════════════════════════════════════ */
+.cycle-section {
+  background:var(--paper-alt);
+  border-top:1px solid var(--line-heavy);
+  border-bottom:1px solid var(--line-heavy);
+  padding:7rem 0;
+}
+.cycle-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5rem;
+  align-items:center;
+}
+@media(max-width:760px){ .cycle-grid{grid-template-columns:1fr;} }
+
+/* Breathing animator */
+.breath-animator {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.5rem;
+}
+.breath-circle-wrap {
+  position:relative;
+  width:240px;
+  height:240px;
+}
+.breath-svg { width:100%; height:100%; }
+.phase-text {
+  font-family:'Playfair Display',serif;
+  font-size:1rem;
+  font-style:italic;
+  text-align:center;
+  color:var(--ink-mid);
+  min-height:1.5em;
+}
+.breath-controls {
+  display:flex;
+  gap:0.75rem;
+}
+.btn {
+  font-family:'DM Sans',sans-serif;
+  font-size:0.72rem;
+  font-weight:500;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:0.6rem 1.4rem;
+  border:1px solid var(--ink-mid);
+  background:transparent;
+  color:var(--ink-mid);
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+.btn:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+.btn.active { background:var(--rust); color:var(--paper); border-color:var(--rust); }
+
+.cycle-phases { display:flex; flex-direction:column; gap:1.5rem; }
+.cphase {
+  padding:1.5rem;
+  border-left:2px solid var(--line-heavy);
+  transition:border-color 0.3s ease, background 0.3s ease;
+}
+.cphase.active {
+  border-color:var(--rust);
+  background:rgba(139,58,28,0.05);
+}
+.cphase-name {
+  font-family:'DM Sans',sans-serif;
+  font-size:0.65rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--rust);
+  margin-bottom:0.4rem;
+}
+.cphase h3 { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--ink); margin-bottom:0.4rem; }
+.cphase p { font-size:0.92rem; color:var(--ink-soft); max-width:100%; margin:0; line-height:1.6; }
+
+/* ═══════════════════════════════════════
+   SECTION: ERRORES
+═══════════════════════════════════════ */
+.errors-section { padding:7rem 0; }
+.errors-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.5rem;
+  margin-top:3rem;
+}
+@media(max-width:640px){ .errors-grid{grid-template-columns:1fr;} }
+
+.error-card {
+  background:var(--paper-alt);
+  border:1px solid var(--line);
+  padding:2rem;
+  position:relative;
+  overflow:hidden;
+  transition:box-shadow 0.25s ease;
+}
+.error-card:hover { box-shadow:0 12px 40px rgba(26,20,16,0.1); }
+.error-card::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0;
+  height:3px;
+  background:var(--rust);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.error-card:hover::before { transform:scaleX(1); }
+.error-icon { font-size:1.6rem; margin-bottom:0.75rem; }
+.error-card h3 { font-family:'Playfair Display',serif; font-style:normal; font-weight:700; font-size:1.05rem; color:var(--ink); margin-bottom:0.5rem; }
+.error-card p { font-size:0.9rem; max-width:100%; margin:0; color:var(--ink-soft); line-height:1.6; }
+.fix-label {
+  display:inline-block;
+  margin-top:0.9rem;
+  font-size:0.68rem;
+  font-family:'DM Sans',sans-serif;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--sage);
+  border-bottom:1px solid var(--sage);
+  padding-bottom:1px;
+}
+
+/* ═══════════════════════════════════════
+   SECTION: EJERCICIOS
+═══════════════════════════════════════ */
+.exercises-section {
+  background:var(--ink);
+  padding:7rem 0;
+}
+.exercises-section .label { color:var(--gold-light); }
+.exercises-section .label::before { background:var(--gold-light); }
+.exercises-section h2 { color:var(--paper); }
+.exercises-section h2 em { color:var(--gold-light); }
+
+.ex-list { margin-top:4rem; }
+.ex-item {
+  display:grid;
+  grid-template-columns:56px 1fr;
+  gap:2rem;
+  padding:2.5rem 0;
+  border-top:1px solid rgba(245,240,232,0.1);
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity 0.6s ease, transform 0.6s ease;
+}
+.ex-item.vis { opacity:1; transform:none; }
+.ex-item:last-child { border-bottom:1px solid rgba(245,240,232,0.1); }
+
+.ex-num {
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem;
+  font-weight:700;
+  color:rgba(245,240,232,0.15);
+  line-height:1;
+}
+.ex-body h3 {
+  font-family:'Playfair Display',serif;
+  font-style:normal;
+  font-weight:700;
+  font-size:1.2rem;
+  color:var(--paper);
+  margin-bottom:0.5rem;
+}
+.ex-body p { color:rgba(245,240,232,0.6); max-width:100%; font-size:0.97rem; margin:0; line-height:1.7; }
+
+.ex-tag {
+  display:inline-block;
+  margin-top:0.75rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.62rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--gold-light);
+  opacity:0.7;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background:var(--paper-alt);
+  border-top:1px solid var(--line-heavy);
+  padding:4rem 0;
+  text-align:center;
+}
+.footer-brand {
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:0.5rem;
+}
+footer p {
+  font-size:0.85rem;
+  color:var(--ink-soft);
+  max-width:100%;
+  margin:0 auto 0.25rem;
+}
+
+/* ═══════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════ */
+@keyframes riseIn {
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* Lung animation keyframes */
+@keyframes lungExpand {
+  0%,100% { transform:scale(1); }
+  50%      { transform:scale(1.08); }
+}
+@keyframes diaphDown {
+  0%,100% { transform:translateY(0); }
+  50%      { transform:translateY(12px); }
+}
+@keyframes ribOut {
+  0%,100% { transform:scaleX(1); }
+  50%      { transform:scaleX(1.07); }
+}
+@keyframes airDrop {
+  0%   { stroke-dashoffset:60; opacity:0.8; }
+  100% { stroke-dashoffset:0;  opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     HEADER
+══════════════════════════════ -->
+<header>
+  <div class="breath-ring ring1"></div>
+  <div class="breath-ring ring2"></div>
+  <div class="breath-ring ring3"></div>
+
+  <div class="header-inner">
+    <p class="header-kicker">Técnica Vocal · Magali Muro</p>
+    <h1 class="header-title display">
+      Respirar
+      <em>para cantar</em>
+    </h1>
+    <p class="header-subtitle">
+      La respiración no es un recurso del canto.<br>Es la condición en la que el canto ocurre.
+    </p>
+  </div>
+
+  <div class="scroll-cue">Explorá</div>
+</header>
+
+<!-- ══════════════════════════════
+     INTRO
+══════════════════════════════ -->
+<section class="intro-section">
+  <div class="wrap">
+    <div class="intro-grid">
+      <div>
+        <div class="intro-number">01</div>
+        <div class="label">El punto de partida</div>
+        <h2>El aire no<br>es <em>combustible</em></h2>
+        <p>La creencia más difundida sobre la respiración en el canto es que hay que "llenar" de aire para luego "usarlo". Esa metáfora lleva a dos errores opuestos: o se fuerza el llenado creando tensión previa, o se gasta el aire sin control y la frase colapsa a mitad de camino.</p>
+        <p>El paradigma más preciso es otro: el aire es una <strong>variable de presión</strong>. Lo que sostiene la voz no es la cantidad de aire que entraste, sino la presión que generás por debajo de las cuerdas vocales mientras fonás. Esa presión —y no el volumen— es lo que regulás cuando aprendés a respirar para cantar.</p>
+      </div>
+      <div>
+        <div class="intro-number">02</div>
+        <div class="label">La distinción clave</div>
+        <h2>Flujo de aire vs.<br><em>presión</em> de aire</h2>
+        <p>Son dos cosas distintas que se suelen confundir. El <em>flujo</em> es cuánto aire pasa por unidad de tiempo. La <em>presión</em> es la fuerza que ese aire ejerce sobre los pliegues vocales desde abajo (presión subglótica).</p>
+        <p>Cuando el flujo es excesivo, las cuerdas no pueden cerrarse limpiamente: la voz sale soplada, sin armónicos. Cuando la presión es demasiado alta, las cuerdas se hiperaducen: la voz se endurece. El trabajo técnico consiste en encontrar el equilibrio entre flujo y presión apropiado para cada registro, dinámica y estilo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ══════════════════════════════
+     ANATOMÍA INTERACTIVA
+══════════════════════════════ -->
+<section class="anatomy-section">
+  <div class="wrap">
+    <div class="anatomy-grid">
+
+      <div>
+        <div class="label">Anatomía funcional</div>
+        <h2>Lo que se mueve<br>cuando <em>respirás</em></h2>
+        <p>Tocá cada área del diagrama para entender qué rol cumple durante la fonación.</p>
+        <p>No todos los músculos implicados en la respiración para cantar son los mismos que usamos para respirar en reposo. Algunos se activan de forma coordinada para crear el tipo específico de sostenimiento que requiere una frase musical.</p>
+        <p>Lo que la mayoría llama "apoyo" es en realidad la acción coordinada de tres grupos musculares: los inspiratorios (que frenan el ascenso del diafragma), los espiratorios (que generan presión) y los de anclaje (que estabilizan la posición de la laringe).</p>
+      </div>
+
+      <!-- Torso interactivo SVG -->
+      <div class="diagram-wrap" id="diagramWrap">
+        <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama anatómico interactivo del sistema respiratorio">
+          <defs>
+            <radialGradient id="lGrad" cx="40%" cy="35%" r="60%">
+              <stop offset="0%" stop-color="#8B3A1C" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#3D1A0A" stop-opacity="0.4"/>
+            </radialGradient>
+            <radialGradient id="lGrad2" cx="60%" cy="35%" r="60%">
+              <stop offset="0%" stop-color="#8B3A1C" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#3D1A0A" stop-opacity="0.4"/>
+            </radialGradient>
+            <filter id="softGlow">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!-- animated air particles -->
+            <marker id="arrowW" markerWidth="6" markerHeight="5" refX="6" refY="2.5" orient="auto">
+              <polygon points="0 0,6 2.5,0 5" fill="rgba(212,168,50,0.7)"/>
+            </marker>
+          </defs>
+
+          <!-- Body outline -->
+          <ellipse cx="210" cy="290" rx="130" ry="190" fill="rgba(245,240,232,0.03)" stroke="rgba(245,240,232,0.1)" stroke-width="1"/>
+
+          <!-- RIB CAGE (clickable) -->
+          <g id="zone-ribs" class="zone" style="cursor:pointer">
+            <!-- Left ribs -->
+            <path d="M195 150 Q148 168 138 196" stroke="rgba(245,240,232,0.35)" stroke-width="2" fill="none"/>
+            <path d="M196 168 Q146 188 137 216" stroke="rgba(245,240,232,0.28)" stroke-width="2" fill="none"/>
+            <path d="M197 186 Q148 208 139 236" stroke="rgba(245,240,232,0.22)" stroke-width="2" fill="none"/>
+            <path d="M198 203 Q150 226 143 254" stroke="rgba(245,240,232,0.17)" stroke-width="2" fill="none"/>
+            <path d="M199 220 Q154 244 148 268" stroke="rgba(245,240,232,0.12)" stroke-width="2" fill="none"/>
+            <!-- Right ribs -->
+            <path d="M225 150 Q272 168 282 196" stroke="rgba(245,240,232,0.35)" stroke-width="2" fill="none"/>
+            <path d="M224 168 Q274 188 283 216" stroke="rgba(245,240,232,0.28)" stroke-width="2" fill="none"/>
+            <path d="M223 186 Q272 208 281 236" stroke="rgba(245,240,232,0.22)" stroke-width="2" fill="none"/>
+            <path d="M222 203 Q270 226 277 254" stroke="rgba(245,240,232,0.17)" stroke-width="2" fill="none"/>
+            <path d="M221 220 Q266 244 272 268" stroke="rgba(245,240,232,0.12)" stroke-width="2" fill="none"/>
+            <!-- Sternum -->
+            <line x1="210" y1="138" x2="210" y2="270" stroke="rgba(245,240,232,0.4)" stroke-width="2.5"/>
+            <!-- Invisible hit area -->
+            <rect x="130" y="138" width="160" height="140" fill="transparent"/>
+          </g>
+
+          <!-- LEFT LUNG -->
+          <path id="zone-leftlung"
+            class="zone"
+            style="cursor:pointer; animation: lungExpand 4s ease-in-out infinite; transform-origin:200px 220px;"
+            d="M210 148 Q172 138 150 162 Q126 192 130 244 Q133 280 158 295 Q180 305 210 290"
+            fill="url(#lGrad)" stroke="rgba(139,58,28,0.7)" stroke-width="1.5"/>
+
+          <!-- RIGHT LUNG -->
+          <path id="zone-rightlung"
+            class="zone"
+            style="cursor:pointer; animation: lungExpand 4s ease-in-out infinite; transform-origin:220px 220px;"
+            d="M210 148 Q248 138 270 162 Q294 192 290 244 Q287 280 262 295 Q240 305 210 290"
+            fill="url(#lGrad2)" stroke="rgba(139,58,28,0.7)" stroke-width="1.5"/>
+
+          <!-- TRACHEA -->
+          <rect id="zone-trachea"
+            class="zone"
+            style="cursor:pointer;"
+            x="203" y="80" width="14" height="70"
+            rx="7" fill="rgba(184,134,26,0.4)" stroke="rgba(184,134,26,0.8)" stroke-width="1.5"/>
+
+          <!-- Air particles in trachea -->
+          <path d="M210 55 L210 78" stroke="rgba(212,168,50,0.8)" stroke-width="2.5"
+            stroke-dasharray="6 4" stroke-linecap="round" marker-end="url(#arrowW)">
+            <animate attributeName="stroke-dashoffset" values="20;0" dur="1.5s" repeatCount="indefinite"/>
+          </path>
+          <path d="M204 55 L204 78" stroke="rgba(212,168,50,0.4)" stroke-width="1.5"
+            stroke-dasharray="4 4" stroke-linecap="round">
+            <animate attributeName="stroke-dashoffset" values="20;0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+          </path>
+          <path d="M216 55 L216 78" stroke="rgba(212,168,50,0.4)" stroke-width="1.5"
+            stroke-dasharray="4 4" stroke-linecap="round">
+            <animate attributeName="stroke-dashoffset" values="20;0" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Larynx / glottis -->
+          <g id="zone-larynx" class="zone" style="cursor:pointer;">
+            <ellipse cx="210" cy="72" rx="14" ry="20"
+              fill="rgba(74,103,65,0.4)" stroke="rgba(74,103,65,0.9)" stroke-width="1.5"
+              filter="url(#softGlow)"/>
+            <line x1="204" y1="72" x2="216" y2="72" stroke="rgba(245,240,232,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+          </g>
+
+          <!-- DIAPHRAGM -->
+          <g id="zone-diaphragm" class="zone" style="cursor:pointer; animation: diaphDown 4s ease-in-out infinite; transform-origin:210px 305px;">
+            <path d="M128 298 Q210 336 292 298"
+              stroke="rgba(212,168,50,0.9)" stroke-width="3" fill="rgba(212,168,50,0.08)"
+              filter="url(#softGlow)"/>
+            <!-- Movement arrows -->
+            <path d="M178 315 L178 332 M172 326 L178 332 L184 326" stroke="rgba(212,168,50,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M210 322 L210 339 M204 333 L210 339 L216 333" stroke="rgba(212,168,50,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M242 315 L242 332 M236 326 L242 332 L248 326" stroke="rgba(212,168,50,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+
+          <!-- ABDOMINAL zone -->
+          <g id="zone-abdomen" class="zone" style="cursor:pointer;">
+            <ellipse cx="210" cy="395" rx="78" ry="42"
+              fill="rgba(74,103,65,0.12)" stroke="rgba(74,103,65,0.35)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          </g>
+
+          <!-- Labels (static, small) -->
+          <text x="210" y="28" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(212,168,50,0.8)" letter-spacing="0.12em">LARINGE / GLOTIS</text>
+          <text x="108" y="212" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(245,240,232,0.45)" letter-spacing="0.08em">PULMÓN IZQ.</text>
+          <text x="312" y="212" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(245,240,232,0.45)" letter-spacing="0.08em">PULMÓN DER.</text>
+          <text x="210" y="360" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="rgba(212,168,50,0.75)" letter-spacing="0.1em">DIAFRAGMA</text>
+          <text x="210" y="430" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(74,103,65,0.7)" letter-spacing="0.1em">EXPANSIÓN ABDOMINAL</text>
+
+          <!-- Click hint -->
+          <text x="210" y="495" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" fill="rgba(245,240,232,0.3)" letter-spacing="0.1em">TOCÁ CADA ZONA</text>
+        </svg>
+
+        <!-- Tooltip -->
+        <div class="tooltip-box" id="tooltip">
+          <span class="tooltip-title" id="tipTitle"></span>
+          <span id="tipText"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     5 VARIABLES
+══════════════════════════════ -->
+<section class="variables-section">
+  <div class="wrap">
+    <div class="vars-intro">
+      <div class="label">Las variables del cantante</div>
+      <h2>Cinco factores que<br>podés <em>entrenar</em></h2>
+      <p>La respiración para cantar no es una sola habilidad, es un conjunto de variables independientes. Cada una se puede trabajar por separado y luego integrar. Este es el mapa del entrenamiento.</p>
+    </div>
+
+    <div class="var-item" data-delay="0">
+      <div class="var-num">1</div>
+      <div class="var-body">
+        <h3>Volumen inspiratorio</h3>
+        <p>Cuánto aire tomás. No más es mejor. Tomás el volumen que necesita la frase, y nada más. Un exceso de aire genera tensión diafragmática previa que interfiere con la fonación. El objetivo es precisión, no capacidad.</p>
+      </div>
+      <div class="var-chart">
+        <p style="font-size:0.7rem;color:var(--ink-soft);margin-bottom:0.6rem;font-family:'DM Sans',sans-serif;letter-spacing:0.08em;">efecto en la voz</p>
+        <div class="mini-chart">
+          <div class="bar-row">
+            <span class="bar-label">Frase corta</span>
+            <div class="bar-track"><div class="bar-fill" style="width:35%;"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Frase media</span>
+            <div class="bar-track"><div class="bar-fill" style="width:60%;"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Frase larga</span>
+            <div class="bar-track"><div class="bar-fill" style="width:85%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="var-item" data-delay="1">
+      <div class="var-num">2</div>
+      <div class="var-body">
+        <h3>Velocidad del flujo espiratorio</h3>
+        <p>A qué velocidad sale el aire. Flujo rápido genera voz soplada o breathy. Flujo lento con alta presión puede generar tensión. La velocidad del flujo es una variable que cambia según el registro y la dinámica: los agudos potentes piden más presión y menos flujo, no más aire.</p>
+      </div>
+      <div class="var-chart">
+        <p style="font-size:0.7rem;color:var(--ink-soft);margin-bottom:0.6rem;font-family:'DM Sans',sans-serif;letter-spacing:0.08em;">presión resultante</p>
+        <div class="mini-chart">
+          <div class="bar-row">
+            <span class="bar-label">Flujo alto</span>
+            <div class="bar-track"><div class="bar-fill" style="width:25%; background:var(--rust-light);"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Equilibrado</span>
+            <div class="bar-track"><div class="bar-fill" style="width:65%; background:var(--sage);"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Flujo bajo</span>
+            <div class="bar-track"><div class="bar-fill" style="width:80%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="var-item" data-delay="2">
+      <div class="var-num">3</div>
+      <div class="var-body">
+        <h3>Resistencia glótica</h3>
+        <p>Cuánto cierran los pliegues vocales. Esta es la variable que interactúa directamente con el flujo: a mayor cierre (aducción), se necesita más presión subglótica para vibrar. Esto es lo que produce la diferencia entre una voz aireada y una voz comprimida o "metalizada". La respiración sola no decide el resultado: la gestión del cierre glótico lo hace.</p>
+      </div>
+      <div class="var-chart">
+        <p style="font-size:0.7rem;color:var(--ink-soft);margin-bottom:0.6rem;font-family:'DM Sans',sans-serif;letter-spacing:0.08em;">calidad vocal</p>
+        <div class="mini-chart">
+          <div class="bar-row">
+            <span class="bar-label">Cierre mínimo</span>
+            <div class="bar-track"><div class="bar-fill" style="width:20%; background:var(--rust-light);"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Cierre medio</span>
+            <div class="bar-track"><div class="bar-fill" style="width:60%; background:var(--sage);"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Cierre total</span>
+            <div class="bar-track"><div class="bar-fill" style="width:90%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="var-item" data-delay="3">
+      <div class="var-num">4</div>
+      <div class="var-body">
+        <h3>Anclaje del torso</h3>
+        <p>La posición del cuerpo como estructura de soporte. Cuando la musculatura del torso (dorsal, intercostal, abdominal oblicua) está activamente involucrada, la laringe puede operar con mucha más libertad. El "anclaje" no es tensión: es organización muscular que libera la zona alta de presiones innecesarias. Sin anclaje, la laringe "trabaja sola" y se fatiga.</p>
+      </div>
+      <div class="var-chart">
+        <p style="font-size:0.7rem;color:var(--ink-soft);margin-bottom:0.6rem;font-family:'DM Sans',sans-serif;letter-spacing:0.08em;">libertad laríngea</p>
+        <div class="mini-chart">
+          <div class="bar-row">
+            <span class="bar-label">Sin anclaje</span>
+            <div class="bar-track"><div class="bar-fill" style="width:22%; background:var(--rust-light);"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Anclaje parcial</span>
+            <div class="bar-track"><div class="bar-fill" style="width:55%;"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Anclaje activo</span>
+            <div class="bar-track"><div class="bar-fill" style="width:88%; background:var(--sage);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="var-item" data-delay="4">
+      <div class="var-num">5</div>
+      <div class="var-body">
+        <h3>Sostenimiento inspiratorio activo</h3>
+        <p>Durante la espiración fonada, los músculos inspiratorios no se desconectan: frenan el ascenso del diafragma de manera activa. Esta acción es lo que la mayoría llama "apoyo". No es empujar desde el abdomen hacia afuera ni desde el pecho hacia adelante: es resistencia suave al colapso, que mantiene la presión subglótica estable a lo largo de la frase.</p>
+      </div>
+      <div class="var-chart">
+        <p style="font-size:0.7rem;color:var(--ink-soft);margin-bottom:0.6rem;font-family:'DM Sans',sans-serif;letter-spacing:0.08em;">estabilidad de presión</p>
+        <div class="mini-chart">
+          <div class="bar-row">
+            <span class="bar-label">Sin freno</span>
+            <div class="bar-track"><div class="bar-fill" style="width:18%; background:var(--rust-light);"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Freno parcial</span>
+            <div class="bar-track"><div class="bar-fill" style="width:52%;"></div></div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Freno activo</span>
+            <div class="bar-track"><div class="bar-fill" style="width:91%; background:var(--sage);"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     CICLO RESPIRATORIO
+══════════════════════════════ -->
+<section class="cycle-section">
+  <div class="wrap">
+    <div class="cycle-grid">
+      <div>
+        <div class="label">El ciclo en tiempo real</div>
+        <h2>Tres momentos,<br>una sola <em>intención</em></h2>
+        <p>En el canto popular, el ciclo respiratorio rara vez tiene las tres fases en el orden clásico. La preparación, la inhalación y la emisión se integran en un gesto continuo y casi siempre muy rápido. Lo que distingue al cantante entrenado es que ese gesto es <em>organizado</em>, no automático.</p>
+        <p>Presioná cada fase para ver qué ocurre en el cuerpo.</p>
+
+        <div class="cycle-phases">
+          <div class="cphase active" id="ph0">
+            <div class="cphase-name">Fase 1 · Preparación</div>
+            <h3>La intención antes del aire</h3>
+            <p>El cuerpo se organiza: postura, anclaje, relajación de hombros y cuello. No es un gesto visible, pero es decisivo. Aquí se setea la condición muscular que va a sostener la frase.</p>
+          </div>
+          <div class="cphase" id="ph1">
+            <div class="cphase-name">Fase 2 · Inhalación</div>
+            <h3>Rápida, lateral, silenciosa</h3>
+            <p>El diafragma desciende, las costillas inferiores se expanden hacia afuera. El aire entra sin esfuerzo. No hay sonido de aspiración, no hay elevación del pecho. Tomás solo lo que la frase necesita.</p>
+          </div>
+          <div class="cphase" id="ph2">
+            <div class="cphase-name">Fase 3 · Fonación sostenida</div>
+            <h3>El diafragma frena su ascenso</h3>
+            <p>Los músculos inspiratorios se mantienen activos y frenan el colapso. El flujo sale de forma controlada y constante. La presión subglótica se mantiene dentro del rango que necesitan las cuerdas para vibrar con limpieza.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Breath animator -->
+      <div class="breath-animator">
+        <div class="breath-circle-wrap">
+          <svg class="breath-svg" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" id="breathSvg">
+            <defs>
+              <radialGradient id="bGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#8B3A1C" stop-opacity="0.35" id="bCenter"/>
+                <stop offset="100%" stop-color="#8B3A1C" stop-opacity="0.05" id="bEdge"/>
+              </radialGradient>
+            </defs>
+            <!-- Outer rings -->
+            <circle cx="120" cy="120" r="112" fill="none" stroke="rgba(139,58,28,0.1)" stroke-width="1"/>
+            <circle cx="120" cy="120" r="95" fill="none" stroke="rgba(139,58,28,0.08)" stroke-width="1"/>
+            <circle cx="120" cy="120" r="78" fill="none" stroke="rgba(139,58,28,0.06)" stroke-width="1"/>
+            <!-- Main breathing circle -->
+            <circle cx="120" cy="120" r="60" fill="url(#bGrad)" stroke="rgba(139,58,28,0.5)" stroke-width="2" id="breathCircle"/>
+            <!-- Inner dot -->
+            <circle cx="120" cy="120" r="6" fill="rgba(139,58,28,0.4)" id="breathDot"/>
+            <!-- Phase label inside -->
+            <text x="120" y="115" text-anchor="middle" font-family="Playfair Display,serif" font-size="13" font-style="italic" fill="rgba(139,58,28,0.8)" id="breathLabel">preparación</text>
+            <text x="120" y="133" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8.5" fill="rgba(26,20,16,0.45)" letter-spacing="0.08em" id="breathSub">organizate</text>
+          </svg>
+        </div>
+
+        <div class="phase-text" id="phaseDisplay">Preparación del cuerpo</div>
+
+        <div class="breath-controls">
+          <button class="btn active" id="btnPlay">Iniciar ciclo</button>
+          <button class="btn" id="btnPause">Pausar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     ERRORES
+══════════════════════════════ -->
+<section class="errors-section">
+  <div class="wrap">
+    <div class="label">Diagnóstico</div>
+    <h2>Los errores más<br><em>frecuentes</em></h2>
+    <p>Reconocer el error es el primer paso para soltarlo. Estos patrones aparecen en la mayoría de los cantantes que no han tenido entrenamiento respiratorio específico.</p>
+
+    <div class="errors-grid">
+
+      <div class="error-card">
+        <div class="error-icon">↑</div>
+        <h3>Respiración clavicular</h3>
+        <p>Los hombros suben al inhalar. Señal de que el aire está entrando en la parte alta de los pulmones, donde hay menos volumen y donde los músculos del cuello y los escalenos se activan innecesariamente. Resultado: tensión previa a la fonación.</p>
+        <span class="fix-label">→ Expandir lateralmente, no hacia arriba</span>
+      </div>
+
+      <div class="error-card">
+        <div class="error-icon">💨</div>
+        <h3>Soltar el aire de golpe</h3>
+        <p>Al inicio de la frase, el diafragma colapsa sin resistencia y el flujo sale demasiado rápido. Las cuerdas no pueden cerrarse limpiamente: la voz suena soplada o aireada en los primeros compases y "se queda sin aire" antes de terminar la frase.</p>
+        <span class="fix-label">→ Activar el sostenimiento inspiratorio desde el primer sonido</span>
+      </div>
+
+      <div class="error-card">
+        <div class="error-icon">⊘</div>
+        <h3>Bloqueo laríngeo para "guardar aire"</h3>
+        <p>Cerrar la laringe como si fuera un tapón para retener el aire. Genera presión acumulada que explota de forma incontrolada. El sostén correcto es muscular (diafragmático, abdominal, costal), nunca laríngeo.</p>
+        <span class="fix-label">→ La laringe siempre libre; el control es abdominal</span>
+      </div>
+
+      <div class="error-card">
+        <div class="error-icon">⇲</div>
+        <h3>Panza hacia adentro al cantar</h3>
+        <p>Muchos cantantes retraen el abdomen durante la fonación creyendo que es el "apoyo correcto". Esto comprime el diafragma hacia arriba y eleva la presión de golpe. El abdomen puede moverse, pero como consecuencia del flujo, no como gesto deliberado.</p>
+        <span class="fix-label">→ Permitir que el abdomen se mueva, sin forzar la dirección</span>
+      </div>
+
+      <div class="error-card">
+        <div class="error-icon">⊕</div>
+        <h3>Hiperllenado del pulmón</h3>
+        <p>Intentar tomar la máxima cantidad de aire posible antes de cada frase. Genera tensión en toda la musculatura inspiratoria antes de empezar a cantar. La frase corta y rápida no necesita la misma inhalación que la frase larga y lenta.</p>
+        <span class="fix-label">→ Tomar lo justo para lo que viene</span>
+      </div>
+
+      <div class="error-card">
+        <div class="error-icon">△</div>
+        <h3>Tensión en agudos por más presión</h3>
+        <p>Al subir en el registro, la respuesta intuitiva es empujar más air. Pero los agudos en voz mezclada o en head voice necesitan <em>menos</em> flujo y más cierre glótico. Empujar más causa tensión, grietas y fatiga.</p>
+        <span class="fix-label">→ En agudos: menos flujo, más cierre, no más esfuerzo</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     EJERCICIOS
+══════════════════════════════ -->
+<section class="exercises-section">
+  <div class="wrap">
+    <div class="label">Práctica</div>
+    <h2>Ejercicios para<br><em>internalizar</em> el control</h2>
+    <p style="color:rgba(245,240,232,0.6);">Estos ejercicios trabajan una variable por vez. El objetivo no es volumen de aire sino percepción precisa de lo que ocurre en el cuerpo.</p>
+
+    <div class="ex-list">
+
+      <div class="ex-item" data-delay="0">
+        <div class="ex-num">01</div>
+        <div class="ex-body">
+          <h3>Expansión costal con manos</h3>
+          <p>Apoyá las palmas en las costillas inferiores, a los costados del cuerpo. Inhalá buscando que las manos se separen hacia afuera. Si los hombros suben, la respiración sigue siendo alta. Repetí hasta que la expansión sea lateral y posterior, sin movimiento vertical.</p>
+          <span class="ex-tag">Variable 1 · Volumen y zona inspiratoria</span>
+        </div>
+      </div>
+
+      <div class="ex-item" data-delay="1">
+        <div class="ex-body" style="grid-column:2;">
+          <h3>SSS con duración creciente</h3>
+          <p>Inhalá en 2 tiempos. Exhalá en una "SSS" sostenida a intensidad constante: 8 tiempos, luego 12, luego 16. Si el sonido fluctúa (aumenta y baja), hay pérdida de control del flujo. El objetivo es una SSS perfectamente plana en intensidad de principio a fin.</p>
+          <span class="ex-tag">Variable 2 · Velocidad de flujo y sostenimiento</span>
+        </div>
+        <div class="ex-num">02</div>
+      </div>
+
+      <div class="ex-item" data-delay="2">
+        <div class="ex-num">03</div>
+        <div class="ex-body">
+          <h3>Pulsaciones de flujo fraccionado</h3>
+          <p>Con una sola inhalación, exhalá en 8 pulsos breves de "SH" iguales. Luego 4 pulsos más largos. Luego 2. Sentí que podés decidir cuánto cedés en cada pulso. Esa sensación de decisión sobre el caudal es el sostenimiento activo en acción.</p>
+          <span class="ex-tag">Variable 5 · Sostenimiento inspiratorio activo</span>
+        </div>
+      </div>
+
+      <div class="ex-item" data-delay="3">
+        <div class="ex-body" style="grid-column:2;">
+          <h3>Nota larga en zona media</h3>
+          <p>Cantá una vocal abierta (Ah o Eh) en una nota cómoda de tu zona media. Sostené 6–8 tiempos. La nota no debe moverse ni arriba ni abajo, no debe crecer ni disminuir en volumen. Si se mueve, hay fluctuaciones de presión subglótica. Si se mantiene limpia, el sistema está respondiendo.</p>
+          <span class="ex-tag">Variables 2, 3 y 5 · Integración</span>
+        </div>
+        <div class="ex-num">04</div>
+      </div>
+
+      <div class="ex-item" data-delay="4">
+        <div class="ex-num">05</div>
+        <div class="ex-body">
+          <h3>Anclaje de torso con brazos</h3>
+          <p>De pie, extendé los brazos hacia los lados a la altura de los hombros con palmas hacia abajo (como si apoyaras en dos paredes). Mantenés esa activación de dorsal y escapulas mientras cantás. Notá cómo la laringe tiene más libertad y el sonido gana estabilidad. El anclaje no es visible ni audible, pero es estructural.</p>
+          <span class="ex-tag">Variable 4 · Anclaje del torso</span>
+        </div>
+      </div>
+
+      <div class="ex-item" data-delay="5">
+        <div class="ex-body" style="grid-column:2;">
+          <h3>Agudos con menos presión</h3>
+          <p>Tomá una nota media-aguda que te cueste. En lugar de empujar más, reducí el flujo (menos velocidad de salida). Mantené el cuerpo activo pero no fuercés. Si la nota sale más limpia o con menos tensión, confirmaste que el problema no era falta de aire sino exceso de flujo.</p>
+          <span class="ex-tag">Variables 2 y 3 · Agudos sin esfuerzo</span>
+        </div>
+        <div class="ex-num">06</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     FOOTER
+══════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">Magali Muro</div>
+    <p>Coach Vocal · San Cristóbal, Buenos Aires</p>
+    <p style="margin-top:0.3rem;font-size:0.75rem;color:var(--ink-soft);opacity:0.6;">magalimuro.com · @magalimurook</p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════
+     JAVASCRIPT
+══════════════════════════════ -->
+<script>
+/* ── Scroll reveal ── */
+const allReveal = [...document.querySelectorAll('.var-item, .ex-item')];
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const d = parseInt(e.target.dataset.delay || 0);
+      setTimeout(() => e.target.classList.add('vis'), d * 140);
+      ro.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin:'0px 0px -40px 0px' });
+allReveal.forEach(el => ro.observe(el));
+
+/* ── Anatomy tooltips ── */
+const tips = {
+  'zone-larynx': {
+    title:'Laringe y glotis',
+    text:'Los pliegues vocales (cuerdas vocales) viven aquí. Su grado de cierre (aducción) interactúa directamente con la presión del aire: más cierre requiere más presión para vibrar. Esta relación determina el carácter sonoro de tu voz.'
+  },
+  'zone-trachea': {
+    title:'Tráquea',
+    text:'El conductor del aire entre la laringe y los pulmones. No tiene función muscular activa, pero su estado (libre o contraído por tensión externa) afecta la resistencia del flujo.'
+  },
+  'zone-leftlung': {
+    title:'Pulmón izquierdo',
+    text:'Espacio pasivo de almacenamiento. Los pulmones no se contraen solos: el diafragma y los músculos de la caja torácica los expanden o comprimen. El pulmón izquierdo es algo más pequeño por el espacio del corazón.'
+  },
+  'zone-rightlung': {
+    title:'Pulmón derecho',
+    text:'Junto al izquierdo, expande y se comprime según la acción del diafragma y los músculos costales. Su parte inferior, cuando se llena, da la sensación de "respirar hacia los costados y la espalda".'
+  },
+  'zone-ribs': {
+    title:'Caja torácica y costillas',
+    text:'Las costillas inferiores (flotantes y falsas) pueden expandirse hacia los lados. Esta expansión lateral es la señal de que el aire bajó al tercio inferior de los pulmones. Es el movimiento que buscamos al inhalar para cantar.'
+  },
+  'zone-diaphragm': {
+    title:'Diafragma',
+    text:'El músculo clave. Al contraerse, desciende y expande el tórax (inhalación). Al relajarse, asciende (exhalación). En el canto, el trabajo está en frenar ese ascenso activamente durante la fonación. Las flechas muestran ese movimiento de descenso.'
+  },
+  'zone-abdomen': {
+    title:'Zona abdominal',
+    text:'No es la fuente del apoyo vocal, pero sí refleja lo que hace el diafragma. Cuando el diafragma baja, el abdomen se expande hacia afuera. Esa expansión es una consecuencia, no un esfuerzo deliberado. Forzar el abdomen hacia adentro mientras cantás interfiere con el flujo.'
+  }
+};
+
+const tooltip = document.getElementById('tooltip');
+const tipTitle = document.getElementById('tipTitle');
+const tipText  = document.getElementById('tipText');
+const wrap = document.getElementById('diagramWrap');
+
+document.querySelectorAll('.zone').forEach(z => {
+  z.addEventListener('mouseenter', e => {
+    const d = tips[z.id];
+    if(!d) return;
+    tipTitle.textContent = d.title;
+    tipText.textContent  = d.text;
+    tooltip.classList.add('visible');
+  });
+  z.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
+  z.addEventListener('mousemove', e => {
+    const r = wrap.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    tooltip.style.left = (x + 14) + 'px';
+    tooltip.style.top  = (y - 20) + 'px';
+    // flip if off-screen right
+    if(x + 14 + 230 > r.width) tooltip.style.left = (x - 240) + 'px';
+  });
+  // Touch support
+  z.addEventListener('click', e => {
+    const d = tips[z.id];
+    if(!d) return;
+    tipTitle.textContent = d.title;
+    tipText.textContent  = d.text;
+    tooltip.classList.add('visible');
+    const r = wrap.getBoundingClientRect();
+    tooltip.style.left = '50%';
+    tooltip.style.top  = '10px';
+    tooltip.style.transform = 'translateX(-50%)';
+    setTimeout(() => tooltip.classList.remove('visible'), 4000);
+  });
+});
+
+/* ── Breath cycle animator ── */
+const phases = [
+  {
+    label:'preparación',
+    sub:'organizate',
+    display:'Preparación del cuerpo',
+    r:42, dur:2000,
+    fill:'rgba(74,103,65,0.35)',
+    stroke:'rgba(74,103,65,0.6)',
+    phaseId:'ph0'
+  },
+  {
+    label:'inhalación',
+    sub:'expandí lateralmente',
+    display:'Inhalación — expansión costal',
+    r:72, dur:2000,
+    fill:'rgba(139,58,28,0.35)',
+    stroke:'rgba(139,58,28,0.7)',
+    phaseId:'ph1'
+  },
+  {
+    label:'fonación',
+    sub:'frená el diafragma',
+    display:'Fonación sostenida',
+    r:55, dur:4000,
+    fill:'rgba(184,134,26,0.35)',
+    stroke:'rgba(184,134,26,0.7)',
+    phaseId:'ph2'
+  }
+];
+
+const circle  = document.getElementById('breathCircle');
+const bLabel  = document.getElementById('breathLabel');
+const bSub    = document.getElementById('breathSub');
+const phDisp  = document.getElementById('phaseDisplay');
+const btnPlay = document.getElementById('btnPlay');
+const btnPause= document.getElementById('btnPause');
+
+let phIdx = 0, running = true, timer = null;
+
+function setPhase(i){
+  const ph = phases[i];
+  circle.style.transition = `r ${ph.dur}ms ease-in-out, fill ${ph.dur*0.4}ms ease, stroke ${ph.dur*0.4}ms ease`;
+  circle.setAttribute('r', ph.r);
+  circle.setAttribute('fill', ph.fill);
+  circle.setAttribute('stroke', ph.stroke);
+  bLabel.textContent = ph.label;
+  bSub.textContent   = ph.sub;
+  phDisp.textContent = ph.display;
+  document.querySelectorAll('.cphase').forEach(c => c.classList.remove('active'));
+  document.getElementById(ph.phaseId).classList.add('active');
+}
+
+function nextPhase(){
+  phIdx = (phIdx+1) % phases.length;
+  setPhase(phIdx);
+  if(running) timer = setTimeout(nextPhase, phases[phIdx].dur + 200);
+}
+
+setPhase(0);
+timer = setTimeout(nextPhase, phases[0].dur + 200);
+
+btnPlay.addEventListener('click',()=>{
+  if(!running){
+    running = true;
+    btnPlay.classList.add('active');
+    btnPause.classList.remove('active');
+    timer = setTimeout(nextPhase, phases[phIdx].dur + 200);
+  }
+});
+
+btnPause.addEventListener('click',()=>{
+  running = false;
+  clearTimeout(timer);
+  btnPause.classList.add('active');
+  btnPlay.classList.remove('active');
+});
+
+// Manual phase select
+document.querySelectorAll('.cphase').forEach((el,i)=>{
+  el.style.cursor = 'pointer';
+  el.addEventListener('click',()=>{
+    clearTimeout(timer);
+    phIdx = i;
+    setPhase(i);
+    if(running) timer = setTimeout(nextPhase, phases[i].dur + 200);
+  });
+});
+</script>
+</body>
+</html>
