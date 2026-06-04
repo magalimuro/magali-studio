@@ -8,31 +8,18 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --gold:#C9A96E;
-  --gold-dark:#a07840;
-  --dark:#2a2118;
-  --cream:#f5f0e8;
-  --text:#1a1a1a;
-  --text-muted:#6b6b6b;
-  --border:#e0d8cc;
-  --surface:#ffffff;
-  --bg:#f7f4ef;
-  --danger:#c0392b;
-  --success:#27ae60;
+  --gold:#C9A96E;--gold-dark:#a07840;--dark:#2a2118;--cream:#f5f0e8;
+  --text:#1a1a1a;--text-muted:#6b6b6b;--border:#e0d8cc;--surface:#ffffff;--bg:#f7f4ef;
+  --danger:#c0392b;--success:#27ae60;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-
-/* TOPBAR */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:56px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
 .topbar-brand{font-size:13px;font-weight:600;letter-spacing:3px;color:var(--dark)}
 .topbar-right{display:flex;align-items:center;gap:12px}
 .badge{font-size:11px;padding:4px 10px;border-radius:20px;background:var(--cream);color:var(--text-muted);border:1px solid var(--border)}
 .btn-logout{font-size:12px;color:var(--text-muted);background:none;border:none;cursor:pointer;padding:6px 10px;border-radius:6px}
 .btn-logout:hover{background:var(--bg);color:var(--text)}
-
-/* SCREENS */
-.screen{display:none}
-.screen.active{display:block}
+.screen{display:none}.screen.active{display:block}
 
 /* LOGIN */
 .login-page{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
@@ -45,25 +32,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .code-input{width:100%;text-align:center;font-size:22px;letter-spacing:8px;font-weight:600;padding:14px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--dark);outline:none;transition:border-color .2s}
 .code-input:focus{border-color:var(--gold)}
 .btn-primary{width:100%;padding:13px;background:var(--gold);color:var(--dark);border:none;border-radius:10px;font-size:13px;font-weight:600;letter-spacing:2px;cursor:pointer;margin-top:1rem;transition:opacity .2s}
-.btn-primary:hover{opacity:.88}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn-primary:hover{opacity:.88}.btn-primary:disabled{opacity:.5;cursor:not-allowed}
 .login-error{font-size:12px;color:var(--danger);text-align:center;margin-top:10px;display:none}
 .login-hint{font-size:11px;color:var(--text-muted);text-align:center;margin-top:1.25rem}
 
-/* LAYOUT ALUMNO */
+/* LAYOUT */
 .alumno-layout{padding:1.5rem;max-width:860px;margin:0 auto}
 .nav-tabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:4px;margin-bottom:1.5rem}
 .tab{flex:1;padding:9px;text-align:center;font-size:13px;border-radius:7px;cursor:pointer;color:var(--text-muted);border:none;background:none;font-family:inherit;transition:all .15s}
 .tab.active{background:var(--gold);color:var(--dark);font-weight:600}
-.tab-pane{display:none}
-.tab-pane.active{display:block}
+.tab-pane{display:none}.tab-pane.active{display:block}
 
-/* NIVEL PILLS */
+/* NIVELES */
 .nivel-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.25rem}
 .nivel-pill{padding:7px 16px;border-radius:20px;font-size:12px;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text-muted);transition:all .15s;font-family:inherit}
 .nivel-pill.active{background:var(--dark);color:#fff;border-color:var(--dark);font-weight:500}
 
-/* TEMAS GRID */
+/* TEMAS */
 .temas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
 .tema-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;cursor:pointer;transition:all .2s}
 .tema-card:hover{border-color:var(--gold);transform:translateY(-2px)}
@@ -71,21 +56,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .tema-title{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:4px}
 .tema-count{font-size:11px;color:var(--text-muted);margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 
-/* CONTENT VIEWER */
+/* LISTA DE MATERIALES */
+.material-list{display:flex;flex-direction:column;gap:10px}
+.material-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
+.material-item:hover{border-color:var(--gold)}
+.material-item-left{display:flex;align-items:center;gap:12px}
+.material-type-badge{font-size:10px;padding:3px 8px;border-radius:20px;font-weight:500;white-space:nowrap}
+.badge-html{background:#e8f0fe;color:#1a56db}
+.badge-texto{background:#e8f5e9;color:#2e7d32}
+.material-name{font-size:14px;font-weight:600;color:var(--dark)}
+.material-nivel{font-size:11px;color:var(--text-muted);margin-top:2px}
+.btn-abrir{padding:7px 14px;background:var(--gold);color:var(--dark);border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
+
+/* VIEWER TEXTO */
 .viewer-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem}
 .back-btn{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-muted);background:none;border:none;cursor:pointer;margin-bottom:1.25rem;font-family:inherit;padding:0}
 .back-btn:hover{color:var(--dark)}
 .viewer-title{font-size:18px;font-weight:600;color:var(--dark);margin-bottom:1.25rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-.content-item{padding:1.25rem 0;border-bottom:1px solid var(--border)}
-.content-item:last-child{border-bottom:none;padding-bottom:0}
-.content-item-title{font-size:13px;font-weight:600;color:var(--gold-dark);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:1px}
 .content-body{font-size:14px;line-height:1.75;color:var(--text)}
-.content-body h1,.content-body h2,.content-body h3{font-size:15px;font-weight:600;margin-bottom:.5rem;color:var(--dark)}
+.content-body h1,.content-body h2,.content-body h3{font-size:15px;font-weight:600;margin-bottom:.5rem;margin-top:1rem;color:var(--dark)}
 .content-body p{margin-bottom:.75rem}
 .content-body strong{font-weight:600;color:var(--dark)}
-.content-body em{font-style:italic}
 .content-body ul,.content-body ol{padding-left:1.25rem;margin-bottom:.75rem}
 .content-body li{margin-bottom:.25rem}
+
+/* IFRAME VIEWER para páginas completas */
+.iframe-overlay{position:fixed;inset:0;z-index:999;background:#fff;display:flex;flex-direction:column}
+.iframe-topbar{display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:48px;background:var(--dark);color:#fff;flex-shrink:0}
+.iframe-title{font-size:13px;font-weight:500;letter-spacing:1px}
+.iframe-close{background:none;border:1px solid rgba(255,255,255,0.3);color:#fff;padding:6px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-family:inherit}
+.iframe-close:hover{background:rgba(255,255,255,0.1)}
+.iframe-body{flex:1;border:none;width:100%;height:100%}
 
 /* CURRICULUM */
 .cv-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1rem}
@@ -117,8 +118,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .form-input{width:100%;padding:9px 12px;font-size:13px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-family:inherit;outline:none}
 .form-input:focus{border-color:var(--gold)}
 .form-select{width:100%;padding:9px 12px;font-size:13px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-family:inherit;outline:none}
-.form-textarea{width:100%;padding:9px 12px;font-size:13px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-family:monospace;outline:none;resize:vertical;min-height:100px;margin-bottom:8px}
+.form-textarea{width:100%;padding:9px 12px;font-size:13px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-family:monospace;outline:none;resize:vertical;min-height:120px;margin-bottom:8px}
 .form-textarea:focus{border-color:var(--gold)}
+.tipo-selector{display:flex;gap:8px;margin-bottom:12px}
+.tipo-btn{flex:1;padding:10px;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text-muted);font-family:inherit;font-size:13px;cursor:pointer;transition:all .15s;text-align:center}
+.tipo-btn.active{border-color:var(--gold);background:var(--cream);color:var(--dark);font-weight:600}
 .btn-add{padding:9px 18px;background:var(--gold);color:var(--dark);border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
 .btn-add:hover{opacity:.88}
 .btn-del{padding:6px 10px;background:none;border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--text-muted);font-size:12px}
@@ -127,16 +131,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .loading{text-align:center;padding:2rem;color:var(--text-muted);font-size:13px}
 .msg-ok{font-size:12px;color:var(--success);margin-top:8px;display:none}
 .msg-err{font-size:12px;color:var(--danger);margin-top:8px;display:none}
-
-@media(max-width:600px){
-  .temas-grid{grid-template-columns:1fr 1fr}
-  .form-grid{grid-template-columns:1fr}
-}
+.hint{font-size:11px;color:var(--text-muted);margin-bottom:8px;line-height:1.5}
+@media(max-width:600px){.temas-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<!-- TOPBAR (oculta en login) -->
 <div class="topbar" id="topbar" style="display:none">
   <span class="topbar-brand">MAGALI MURO</span>
   <div class="topbar-right">
@@ -145,7 +145,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- SCREEN: LOGIN -->
+<!-- IFRAME OVERLAY para páginas completas -->
+<div class="iframe-overlay" id="iframe-overlay" style="display:none">
+  <div class="iframe-topbar">
+    <span class="iframe-title" id="iframe-label">MAGALI MURO · VOCAL STUDIO</span>
+    <button class="iframe-close" onclick="closeIframe()">← Volver a la plataforma</button>
+  </div>
+  <iframe class="iframe-body" id="iframe-body" src="about:blank"></iframe>
+</div>
+
+<!-- LOGIN -->
 <div class="screen active" id="screen-login">
   <div class="login-page">
     <div class="login-brand">
@@ -155,7 +164,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
     <div class="login-card">
       <div class="field-label">CÓDIGO DE ACCESO</div>
-      <input class="code-input" id="login-code" maxlength="8" placeholder="······" autocomplete="off" />
+      <input class="code-input" id="login-code" maxlength="8" placeholder="······" autocomplete="off"/>
       <button class="btn-primary" id="login-btn" onclick="doLogin()">INGRESAR</button>
       <div class="login-error" id="login-error">Código incorrecto. Verificá con Magali.</div>
       <p class="login-hint">¿No tenés tu código? Escribile a tu profe.</p>
@@ -163,28 +172,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- SCREEN: ALUMNO -->
+<!-- ALUMNO -->
 <div class="screen" id="screen-alumno">
   <div class="alumno-layout">
     <div class="nav-tabs">
-      <button class="tab active" onclick="showAlumnoTab('contenido', this)">Contenido</button>
-      <button class="tab" onclick="showAlumnoTab('curriculum', this)">Currículum</button>
+      <button class="tab active" onclick="showAlumnoTab('contenido',this)">Contenido</button>
+      <button class="tab" onclick="showAlumnoTab('curriculum',this)">Currículum</button>
     </div>
-
     <div class="tab-pane active" id="pane-contenido">
       <div id="browse-view">
         <div class="nivel-bar" id="nivel-bar"></div>
         <div id="temas-container"><div class="loading">Cargando contenido...</div></div>
       </div>
-      <div id="viewer-view" style="display:none">
+      <div id="material-list-view" style="display:none">
         <div class="viewer-wrap">
           <button class="back-btn" onclick="showBrowse()">← Volver</button>
+          <div class="viewer-title" id="list-title"></div>
+          <div class="material-list" id="material-list"></div>
+        </div>
+      </div>
+      <div id="viewer-view" style="display:none">
+        <div class="viewer-wrap">
+          <button class="back-btn" onclick="showMaterialList()">← Volver</button>
           <div class="viewer-title" id="viewer-title"></div>
-          <div id="viewer-body"></div>
+          <div class="content-body" id="viewer-body"></div>
         </div>
       </div>
     </div>
-
     <div class="tab-pane" id="pane-curriculum">
       <div class="cv-card">
         <div class="cv-header">
@@ -194,39 +208,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
             <div class="cv-sub">Vocal Coach & Cantante · +15 años de experiencia · Buenos Aires</div>
           </div>
         </div>
-
         <div class="cv-section-title">FORMACIÓN TÉCNICA</div>
         <div class="cv-item"><div class="cv-item-name">Speech Level Singing (SLS)</div><div class="cv-item-sub">Certificación internacional</div></div>
         <div class="cv-item"><div class="cv-item-name">Complete Vocal Technique (CVT)</div><div class="cv-item-sub">Copenhagen Singing Academy</div></div>
         <div class="cv-item"><div class="cv-item-name">Voice Craft</div><div class="cv-item-sub">Técnica australiana de pedagogía vocal</div></div>
         <div class="cv-item"><div class="cv-item-name">Método Rabine · Técnica Alexander · Frankendails</div><div class="cv-item-sub">Técnicas complementarias de cuerpo y voz</div></div>
       </div>
-
       <div class="cv-card">
         <div class="cv-section-title">ESPECIALIDADES</div>
         <div class="tags">
-          <span class="tag">Agility vocal</span>
-          <span class="tag">Melismas</span>
-          <span class="tag">Riffs & Runs</span>
-          <span class="tag">R&B contemporáneo</span>
-          <span class="tag">Pop · Soul</span>
-          <span class="tag">Técnica para principiantes</span>
-          <span class="tag">Canto contemporáneo</span>
-          <span class="tag">Oratoria ejecutiva</span>
-          <span class="tag">Comunicación de liderazgo</span>
-          <span class="tag">Coaching C-level</span>
+          <span class="tag">Agility vocal</span><span class="tag">Melismas</span><span class="tag">Riffs & Runs</span>
+          <span class="tag">R&B contemporáneo</span><span class="tag">Pop · Soul</span>
+          <span class="tag">Técnica para principiantes</span><span class="tag">Canto contemporáneo</span>
+          <span class="tag">Oratoria ejecutiva</span><span class="tag">Comunicación de liderazgo</span>
         </div>
       </div>
-
       <div class="cv-card">
         <div class="cv-section-title">PROGRAMAS</div>
         <div class="cv-item"><div class="cv-item-name">Clases individuales · Pack mensual</div><div class="cv-item-sub">Técnica vocal personalizada</div></div>
         <div class="cv-item"><div class="cv-item-name">Clases grupales mensuales</div><div class="cv-item-sub">Grupos reducidos con foco técnico</div></div>
         <div class="cv-item"><div class="cv-item-name">Yoga de la Voz</div><div class="cv-item-sub">Taller especializado</div></div>
         <div class="cv-item"><div class="cv-item-name">Tu Rutina Vocal</div><div class="cv-item-sub">Membresía mensual</div></div>
-        <div class="cv-item"><div class="cv-item-name">Clase introductoria</div><div class="cv-item-sub">Sesión de diagnóstico y primera experiencia</div></div>
       </div>
-
       <div class="cv-card">
         <div class="cv-section-title">DISTINCIONES</div>
         <div class="cv-item"><div class="cv-item-name">Shure Endorser</div><div class="cv-item-sub">Artista endorsada por Shure Argentina</div></div>
@@ -236,20 +239,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 </div>
 
-<!-- SCREEN: ADMIN -->
+<!-- ADMIN -->
 <div class="screen" id="screen-admin">
   <div class="admin-layout">
     <div class="nav-tabs">
-      <button class="tab active" onclick="showAdminTab('alumnos', this)">Alumnos</button>
-      <button class="tab" onclick="showAdminTab('contenido', this)">Contenido</button>
+      <button class="tab active" onclick="showAdminTab('alumnos',this)">Alumnos</button>
+      <button class="tab" onclick="showAdminTab('contenido',this)">Contenido</button>
     </div>
-
     <div class="tab-pane active" id="admin-pane-alumnos">
       <div class="section-title">AGREGAR ALUMNO</div>
       <div class="admin-card">
         <div class="form-grid">
-          <input class="form-input" id="a-nombre" placeholder="Nombre completo" />
-          <input class="form-input" id="a-codigo" placeholder="Código (ej: SOL004)" maxlength="8" style="text-transform:uppercase" />
+          <input class="form-input" id="a-nombre" placeholder="Nombre completo"/>
+          <input class="form-input" id="a-codigo" placeholder="Código (ej: SOL004)" maxlength="8" style="text-transform:uppercase"/>
         </div>
         <div class="form-grid">
           <select class="form-select" id="a-nivel">
@@ -260,9 +262,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
           <button class="btn-add" onclick="addAlumno()">+ Agregar alumno</button>
         </div>
         <div class="msg-ok" id="a-ok">✓ Alumno agregado</div>
-        <div class="msg-err" id="a-err">Error al agregar. ¿El código ya existe?</div>
+        <div class="msg-err" id="a-err">Error. ¿El código ya existe?</div>
       </div>
-
       <div class="section-title">ALUMNOS ACTIVOS</div>
       <div class="admin-card" id="alumnos-list"><div class="loading">Cargando...</div></div>
     </div>
@@ -271,22 +272,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="section-title">SUBIR CONTENIDO</div>
       <div class="admin-card">
         <div class="form-grid">
-          <input class="form-input" id="c-titulo" placeholder="Título del material" />
+          <input class="form-input" id="c-titulo" placeholder="Título del material"/>
           <select class="form-select" id="c-nivel">
             <option value="principiante">Principiante</option>
             <option value="intermedio">Intermedio</option>
             <option value="avanzado">Avanzado</option>
           </select>
         </div>
-        <div style="margin-bottom:8px">
-          <input class="form-input" id="c-tema" placeholder="Categoría (ej: Técnica vocal, Melismas, Riffs & Runs...)" />
+        <input class="form-input" id="c-tema" placeholder="Categoría (ej: Técnica vocal, Melismas...)" style="margin-bottom:8px;width:100%"/>
+
+        <div style="margin-bottom:10px">
+          <div class="section-title" style="margin-bottom:6px">TIPO DE CONTENIDO</div>
+          <div class="tipo-selector">
+            <button class="tipo-btn active" id="tipo-texto" onclick="setTipo('texto')">📝 Texto / Ejercicios</button>
+            <button class="tipo-btn" id="tipo-pagina" onclick="setTipo('pagina')">🌐 Página HTML completa</button>
+          </div>
         </div>
-        <textarea class="form-textarea" id="c-html" placeholder="Pegá acá el HTML del contenido que creó Claude..."></textarea>
+
+        <div id="campo-texto">
+          <p class="hint">Pegá el contenido en HTML simple: párrafos, títulos, listas.</p>
+          <textarea class="form-textarea" id="c-html" placeholder="&lt;p&gt;Tu contenido acá...&lt;/p&gt;"></textarea>
+        </div>
+
+        <div id="campo-url" style="display:none">
+          <p class="hint">Subí el archivo HTML a GitHub (en el repositorio magali-studio) y pegá la URL pública acá. Ejemplo: https://magalimuro.github.io/respiracion.html</p>
+          <input class="form-input" id="c-url" placeholder="https://..." style="margin-bottom:8px;width:100%"/>
+        </div>
+
         <button class="btn-add" onclick="addContenido()">+ Subir contenido</button>
         <div class="msg-ok" id="c-ok">✓ Contenido subido</div>
-        <div class="msg-err" id="c-err">Error al subir el contenido</div>
+        <div class="msg-err" id="c-err">Completá todos los campos</div>
       </div>
-
       <div class="section-title">CONTENIDO CARGADO</div>
       <div class="admin-card" id="contenido-list"><div class="loading">Cargando...</div></div>
     </div>
@@ -294,242 +310,225 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 <script>
-const SUPABASE_URL = 'https://glnmbdpvbofwiymurwyo.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdsbm1iZHB2Ym9md2l5bXVyd3lvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MjI5OTcsImV4cCI6MjA5NjA5ODk5N30.aZqmGiwB3yrVnn71iUeNWAiab3c-dcmZTofIOF-QpyI';
-const ADMIN_CODE = 'MURO2025';
+const SUPABASE_URL='https://glnmbdpvbofwiymurwyo.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdsbm1iZHB2Ym9md2l5bXVyd3lvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1MjI5OTcsImV4cCI6MjA5NjA5ODk5N30.aZqmGiwB3yrVnn71iUeNWAiab3c-dcmZTofIOF-QpyI';
+const ADMIN_CODE='MURO2025';
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let currentUser=null,allContenidos=[],currentNivel='todos',currentTema='',currentTipoForm='texto';
 
-const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-let currentUser = null;
-let allContenidos = [];
-let currentNivel = 'todos';
-
-// LOGIN
-document.getElementById('login-code').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-document.getElementById('login-code').addEventListener('input', e => { e.target.value = e.target.value.toUpperCase(); });
+document.getElementById('login-code').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+document.getElementById('login-code').addEventListener('input',e=>{e.target.value=e.target.value.toUpperCase();});
 
 async function doLogin(){
-  const code = document.getElementById('login-code').value.trim().toUpperCase();
-  const btn = document.getElementById('login-btn');
-  const err = document.getElementById('login-error');
-  err.style.display = 'none';
-  btn.disabled = true;
-  btn.textContent = '...';
-
-  if(code === ADMIN_CODE){
-    currentUser = {role:'admin', nombre:'Administrador'};
-    showScreen('admin');
-    document.getElementById('topbar-badge').textContent = 'Admin';
-    loadAdminData();
-    btn.disabled = false; btn.textContent = 'INGRESAR';
-    return;
+  const code=document.getElementById('login-code').value.trim().toUpperCase();
+  const btn=document.getElementById('login-btn');
+  const err=document.getElementById('login-error');
+  err.style.display='none'; btn.disabled=true; btn.textContent='...';
+  if(code===ADMIN_CODE){
+    currentUser={role:'admin',nombre:'Administrador'};
+    document.getElementById('topbar-badge').textContent='Admin';
+    showScreen('admin'); loadAdminData();
+    btn.disabled=false; btn.textContent='INGRESAR'; return;
   }
-
-  const {data, error} = await sb.from('alumnos').select('*').eq('codigo', code).eq('activo', true).single();
-  btn.disabled = false; btn.textContent = 'INGRESAR';
-
-  if(error || !data){
-    err.style.display = 'block';
-    document.getElementById('login-code').value = '';
-    return;
-  }
-
-  currentUser = {...data, role:'alumno'};
-  document.getElementById('topbar-badge').textContent = data.nombre;
-  showScreen('alumno');
-  buildNivelBar(data.nivel);
-  loadContenidos(data.nivel);
+  const {data,error}=await sb.from('alumnos').select('*').eq('codigo',code).eq('activo',true).single();
+  btn.disabled=false; btn.textContent='INGRESAR';
+  if(error||!data){err.style.display='block'; document.getElementById('login-code').value=''; return;}
+  currentUser={...data,role:'alumno'};
+  document.getElementById('topbar-badge').textContent=data.nombre;
+  showScreen('alumno'); buildNivelBar(data.nivel); loadContenidos(data.nivel);
 }
 
 function logout(){
-  currentUser = null;
-  document.getElementById('login-code').value = '';
-  showScreen('login');
-  document.getElementById('topbar').style.display = 'none';
+  currentUser=null; document.getElementById('login-code').value='';
+  showScreen('login'); document.getElementById('topbar').style.display='none';
 }
 
 function showScreen(name){
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById('screen-'+name).classList.add('active');
-  if(name !== 'login') document.getElementById('topbar').style.display = 'flex';
+  if(name!=='login') document.getElementById('topbar').style.display='flex';
 }
 
-// ALUMNO - TABS
-function showAlumnoTab(name, btn){
-  document.querySelectorAll('#screen-alumno .tab-pane').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('#screen-alumno .tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('pane-'+name).classList.add('active');
-  btn.classList.add('active');
+function showAlumnoTab(name,btn){
+  document.querySelectorAll('#screen-alumno .tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#screen-alumno .tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pane-'+name).classList.add('active'); btn.classList.add('active');
 }
 
-// NIVEL BAR
 function buildNivelBar(nivelAlumno){
-  const map = {principiante:['todos','principiante'], intermedio:['todos','principiante','intermedio'], avanzado:['todos','principiante','intermedio','avanzado']};
-  const labels = {todos:'Todo', principiante:'Principiante', intermedio:'Intermedio', avanzado:'Avanzado'};
-  const bar = document.getElementById('nivel-bar');
-  bar.innerHTML = '';
-  map[nivelAlumno].forEach(n => {
-    const pill = document.createElement('button');
-    pill.className = 'nivel-pill' + (n===currentNivel?' active':'');
-    pill.textContent = labels[n];
-    pill.onclick = () => {
-      currentNivel = n;
-      document.querySelectorAll('.nivel-pill').forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      renderTemas(nivelAlumno);
-    };
+  const map={principiante:['todos','principiante'],intermedio:['todos','principiante','intermedio'],avanzado:['todos','principiante','intermedio','avanzado']};
+  const labels={todos:'Todo',principiante:'Principiante',intermedio:'Intermedio',avanzado:'Avanzado'};
+  const bar=document.getElementById('nivel-bar'); bar.innerHTML='';
+  map[nivelAlumno].forEach(n=>{
+    const pill=document.createElement('button');
+    pill.className='nivel-pill'+(n===currentNivel?' active':'');
+    pill.textContent=labels[n];
+    pill.onclick=()=>{currentNivel=n; document.querySelectorAll('.nivel-pill').forEach(p=>p.classList.remove('active')); pill.classList.add('active'); renderTemas(nivelAlumno);};
     bar.appendChild(pill);
   });
 }
 
-// CARGAR CONTENIDOS
 async function loadContenidos(nivelAlumno){
-  document.getElementById('temas-container').innerHTML = '<div class="loading">Cargando contenido...</div>';
-  const {data, error} = await sb.from('contenidos').select('*').order('created_at', {ascending:true});
-  if(error){ document.getElementById('temas-container').innerHTML = '<div class="empty">Error al cargar contenido.</div>'; return; }
-  allContenidos = data || [];
-  renderTemas(nivelAlumno);
+  document.getElementById('temas-container').innerHTML='<div class="loading">Cargando...</div>';
+  const {data}=await sb.from('contenidos').select('*').order('created_at',{ascending:true});
+  allContenidos=data||[]; renderTemas(nivelAlumno);
 }
 
 function renderTemas(nivelAlumno){
-  const permitidos = {principiante:['principiante'], intermedio:['principiante','intermedio'], avanzado:['principiante','intermedio','avanzado']};
-  const allowed = permitidos[nivelAlumno];
-  let filtered = allContenidos.filter(c => allowed.includes(c.nivel));
-  if(currentNivel !== 'todos') filtered = filtered.filter(c => c.nivel === currentNivel);
-
-  const temaMap = {};
-  filtered.forEach(c => { if(!temaMap[c.tema]) temaMap[c.tema]=[]; temaMap[c.tema].push(c); });
-
-  const icons = {'Técnica vocal':'🎙️','Melismas':'🎵','Riffs & Runs':'🌊','Repertorio':'🎼','Respiración':'🌬️','Ritmo':'🥁','Teoría':'📖','Ejercicios':'💪'};
-  const container = document.getElementById('temas-container');
-
-  if(!Object.keys(temaMap).length){
-    container.innerHTML = '<div class="empty">No hay contenido disponible en este nivel todavía.</div>';
-    return;
-  }
-
-  const grid = document.createElement('div');
-  grid.className = 'temas-grid';
-  Object.entries(temaMap).forEach(([tema, items]) => {
-    const card = document.createElement('div');
-    card.className = 'tema-card';
-    card.innerHTML = `<div class="tema-icon">${icons[tema]||'📄'}</div><div class="tema-title">${tema}</div><div class="tema-count">${items.length} ${items.length===1?'material':'materiales'}</div>`;
-    card.onclick = () => openTema(tema, items);
+  const permitidos={principiante:['principiante'],intermedio:['principiante','intermedio'],avanzado:['principiante','intermedio','avanzado']};
+  const allowed=permitidos[nivelAlumno];
+  let filtered=allContenidos.filter(c=>allowed.includes(c.nivel));
+  if(currentNivel!=='todos') filtered=filtered.filter(c=>c.nivel===currentNivel);
+  const temaMap={};
+  filtered.forEach(c=>{if(!temaMap[c.tema])temaMap[c.tema]=[];temaMap[c.tema].push(c);});
+  const icons={'Técnica vocal':'🎙️','Melismas':'🎵','Riffs & Runs':'🌊','Repertorio':'🎼','Respiración':'🌬️','Ritmo':'🥁','Teoría':'📖','Ejercicios':'💪'};
+  const container=document.getElementById('temas-container');
+  if(!Object.keys(temaMap).length){container.innerHTML='<div class="empty">No hay contenido disponible en este nivel todavía.</div>';return;}
+  const grid=document.createElement('div'); grid.className='temas-grid';
+  Object.entries(temaMap).forEach(([tema,items])=>{
+    const card=document.createElement('div'); card.className='tema-card';
+    card.innerHTML=`<div class="tema-icon">${icons[tema]||'📄'}</div><div class="tema-title">${tema}</div><div class="tema-count">${items.length} ${items.length===1?'material':'materiales'}</div>`;
+    card.onclick=()=>openTema(tema,items);
     grid.appendChild(card);
   });
-  container.innerHTML = '';
-  container.appendChild(grid);
+  container.innerHTML=''; container.appendChild(grid);
 }
 
-function openTema(tema, items){
-  document.getElementById('browse-view').style.display = 'none';
-  document.getElementById('viewer-view').style.display = 'block';
-  document.getElementById('viewer-title').textContent = tema;
-  const body = document.getElementById('viewer-body');
-  body.innerHTML = '';
-  items.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'content-item';
-    div.innerHTML = `<div class="content-item-title">${item.titulo}</div><div class="content-body">${item.html}</div>`;
-    body.appendChild(div);
+function openTema(tema,items){
+  currentTema=tema; currentTemaItems=items;
+  document.getElementById('browse-view').style.display='none';
+  document.getElementById('material-list-view').style.display='block';
+  document.getElementById('viewer-view').style.display='none';
+  document.getElementById('list-title').textContent=tema;
+  const list=document.getElementById('material-list'); list.innerHTML='';
+  items.forEach(item=>{
+    const div=document.createElement('div'); div.className='material-item';
+    const esPagina=item.tipo==='pagina';
+    div.innerHTML=`
+      <div class="material-item-left">
+        <span class="material-type-badge ${esPagina?'badge-html':'badge-texto'}">${esPagina?'Página interactiva':'Texto'}</span>
+        <div>
+          <div class="material-name">${item.titulo}</div>
+          <div class="material-nivel">${item.nivel}</div>
+        </div>
+      </div>
+      <button class="btn-abrir" onclick="abrirMaterial(event,'${item.id}')">Abrir →</button>`;
+    list.appendChild(div);
   });
+}
+
+let currentTemaItems=[];
+
+function abrirMaterial(e,id){
+  e.stopPropagation();
+  const item=currentTemaItems.find(i=>i.id===id);
+  if(!item) return;
+  if(item.tipo==='pagina'&&item.url){
+    document.getElementById('iframe-label').textContent=item.titulo.toUpperCase();
+    document.getElementById('iframe-body').src=item.url;
+    document.getElementById('iframe-overlay').style.display='flex';
+  } else {
+    document.getElementById('material-list-view').style.display='none';
+    document.getElementById('viewer-view').style.display='block';
+    document.getElementById('viewer-title').textContent=item.titulo;
+    document.getElementById('viewer-body').innerHTML=item.html||'';
+  }
+}
+
+function closeIframe(){
+  document.getElementById('iframe-overlay').style.display='none';
+  document.getElementById('iframe-body').src='about:blank';
 }
 
 function showBrowse(){
-  document.getElementById('browse-view').style.display = 'block';
-  document.getElementById('viewer-view').style.display = 'none';
+  document.getElementById('browse-view').style.display='block';
+  document.getElementById('material-list-view').style.display='none';
+  document.getElementById('viewer-view').style.display='none';
 }
 
-// ADMIN - TABS
-function showAdminTab(name, btn){
-  document.querySelectorAll('#screen-admin .tab-pane').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('#screen-admin .tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('admin-pane-'+name).classList.add('active');
-  btn.classList.add('active');
+function showMaterialList(){
+  document.getElementById('material-list-view').style.display='block';
+  document.getElementById('viewer-view').style.display='none';
+}
+
+function showAdminTab(name,btn){
+  document.querySelectorAll('#screen-admin .tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#screen-admin .tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('admin-pane-'+name).classList.add('active'); btn.classList.add('active');
   if(name==='contenido') loadAdminContenido();
 }
 
-async function loadAdminData(){
-  loadAdminAlumnos();
-  loadAdminContenido();
+function setTipo(tipo){
+  currentTipoForm=tipo;
+  document.getElementById('tipo-texto').classList.toggle('active',tipo==='texto');
+  document.getElementById('tipo-pagina').classList.toggle('active',tipo==='pagina');
+  document.getElementById('campo-texto').style.display=tipo==='texto'?'block':'none';
+  document.getElementById('campo-url').style.display=tipo==='pagina'?'block':'none';
 }
 
+async function loadAdminData(){loadAdminAlumnos();loadAdminContenido();}
+
 async function loadAdminAlumnos(){
-  const {data} = await sb.from('alumnos').select('*').order('created_at', {ascending:false});
-  const list = document.getElementById('alumnos-list');
-  if(!data||!data.length){ list.innerHTML = '<div class="empty">No hay alumnos todavía.</div>'; return; }
-  list.innerHTML = data.map(a => `
-    <div class="row">
-      <div>
-        <div class="row-name">${a.nombre}</div>
-        <div class="row-sub">${a.codigo}</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px">
-        <span class="nivel-tag nt-${a.nivel}">${a.nivel}</span>
-        <button class="btn-del" onclick="delAlumno('${a.id}')">✕</button>
-      </div>
-    </div>`).join('');
+  const {data}=await sb.from('alumnos').select('*').order('created_at',{ascending:false});
+  const list=document.getElementById('alumnos-list');
+  if(!data||!data.length){list.innerHTML='<div class="empty">No hay alumnos todavía.</div>';return;}
+  list.innerHTML=data.map(a=>`<div class="row"><div><div class="row-name">${a.nombre}</div><div class="row-sub">${a.codigo}</div></div><div style="display:flex;align-items:center;gap:10px"><span class="nivel-tag nt-${a.nivel}">${a.nivel}</span><button class="btn-del" onclick="delAlumno('${a.id}')">✕</button></div></div>`).join('');
 }
 
 async function addAlumno(){
-  const nombre = document.getElementById('a-nombre').value.trim();
-  const codigo = document.getElementById('a-codigo').value.trim().toUpperCase();
-  const nivel = document.getElementById('a-nivel').value;
-  const ok = document.getElementById('a-ok');
-  const err = document.getElementById('a-err');
+  const nombre=document.getElementById('a-nombre').value.trim();
+  const codigo=document.getElementById('a-codigo').value.trim().toUpperCase();
+  const nivel=document.getElementById('a-nivel').value;
+  const ok=document.getElementById('a-ok'); const err=document.getElementById('a-err');
   ok.style.display='none'; err.style.display='none';
-  if(!nombre||!codigo) return;
-  const {error} = await sb.from('alumnos').insert({nombre, codigo, nivel});
-  if(error){ err.style.display='block'; return; }
+  if(!nombre||!codigo){err.style.display='block';return;}
+  const {error}=await sb.from('alumnos').insert({nombre,codigo,nivel});
+  if(error){err.style.display='block';return;}
   ok.style.display='block';
-  document.getElementById('a-nombre').value='';
-  document.getElementById('a-codigo').value='';
-  setTimeout(()=>ok.style.display='none', 3000);
-  loadAdminAlumnos();
+  document.getElementById('a-nombre').value=''; document.getElementById('a-codigo').value='';
+  setTimeout(()=>ok.style.display='none',3000); loadAdminAlumnos();
 }
 
 async function delAlumno(id){
-  if(!confirm('¿Eliminar este alumno?')) return;
-  await sb.from('alumnos').delete().eq('id', id);
-  loadAdminAlumnos();
+  if(!confirm('¿Eliminar este alumno?'))return;
+  await sb.from('alumnos').delete().eq('id',id); loadAdminAlumnos();
 }
 
 async function loadAdminContenido(){
-  const {data} = await sb.from('contenidos').select('*').order('created_at', {ascending:false});
-  const list = document.getElementById('contenido-list');
-  if(!data||!data.length){ list.innerHTML = '<div class="empty">No hay contenido todavía.</div>'; return; }
-  list.innerHTML = data.map(c => `
-    <div class="row">
-      <div>
-        <div class="row-name">${c.titulo}</div>
-        <div class="row-sub">${c.tema} · ${c.nivel}</div>
-      </div>
-      <button class="btn-del" onclick="delContenido('${c.id}')">✕</button>
-    </div>`).join('');
+  const {data}=await sb.from('contenidos').select('*').order('created_at',{ascending:false});
+  const list=document.getElementById('contenido-list');
+  if(!data||!data.length){list.innerHTML='<div class="empty">No hay contenido todavía.</div>';return;}
+  list.innerHTML=data.map(c=>`<div class="row"><div><div class="row-name">${c.titulo}</div><div class="row-sub">${c.tema} · ${c.nivel} · ${c.tipo||'texto'}</div></div><button class="btn-del" onclick="delContenido('${c.id}')">✕</button></div>`).join('');
 }
 
 async function addContenido(){
-  const titulo = document.getElementById('c-titulo').value.trim();
-  const nivel = document.getElementById('c-nivel').value;
-  const tema = document.getElementById('c-tema').value.trim();
-  const html = document.getElementById('c-html').value.trim();
-  const ok = document.getElementById('c-ok');
-  const err = document.getElementById('c-err');
+  const titulo=document.getElementById('c-titulo').value.trim();
+  const nivel=document.getElementById('c-nivel').value;
+  const tema=document.getElementById('c-tema').value.trim();
+  const ok=document.getElementById('c-ok'); const err=document.getElementById('c-err');
   ok.style.display='none'; err.style.display='none';
-  if(!titulo||!tema||!html) return;
-  const {error} = await sb.from('contenidos').insert({titulo, nivel, tema, html});
-  if(error){ err.style.display='block'; return; }
+  if(!titulo||!tema){err.style.display='block';return;}
+  let payload={titulo,nivel,tema,tipo:currentTipoForm};
+  if(currentTipoForm==='texto'){
+    const html=document.getElementById('c-html').value.trim();
+    if(!html){err.style.display='block';return;}
+    payload.html=html;
+  } else {
+    const url=document.getElementById('c-url').value.trim();
+    if(!url){err.style.display='block';return;}
+    payload.url=url;
+  }
+  const {error}=await sb.from('contenidos').insert(payload);
+  if(error){err.style.display='block';return;}
   ok.style.display='block';
-  document.getElementById('c-titulo').value='';
-  document.getElementById('c-tema').value='';
-  document.getElementById('c-html').value='';
-  setTimeout(()=>ok.style.display='none', 3000);
-  loadAdminContenido();
+  document.getElementById('c-titulo').value=''; document.getElementById('c-tema').value='';
+  document.getElementById('c-html').value=''; document.getElementById('c-url').value='';
+  setTimeout(()=>ok.style.display='none',3000); loadAdminContenido();
 }
 
 async function delContenido(id){
-  if(!confirm('¿Eliminar este contenido?')) return;
-  await sb.from('contenidos').delete().eq('id', id);
-  loadAdminContenido();
+  if(!confirm('¿Eliminar este contenido?'))return;
+  await sb.from('contenidos').delete().eq('id',id); loadAdminContenido();
 }
 </script>
 </body>
